@@ -1,13 +1,16 @@
 /* @jest-environment jsdom */
 
-function mockCreateElement(onClick) {
-  const react = jest.requireActual('react');
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
 
+function mockCreateElement(onClick) {
   return {
-    ...react,
+    ...React,
     createElement: (tagOrComponent, props, ...children) => {
       if (tagOrComponent === 'a') {
-        return react.createElement(
+        return React.createElement(
           tagOrComponent,
           {
             ...props,
@@ -16,16 +19,11 @@ function mockCreateElement(onClick) {
           ...children
         );
       } else {
-        return react.createElement(tagOrComponent, props, ...children);
+        return React.createElement(tagOrComponent, props, ...children);
       }
     }
   };
 }
-
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 
 beforeEach(() => {
   jest.resetModules();
