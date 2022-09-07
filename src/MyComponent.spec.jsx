@@ -44,4 +44,5 @@ test('loads and displays greeting', async () => {
 
   // ASSERT
   expect(onClick).toHaveBeenCalledTimes(1);
+  expect(onClick.mock.calls[0][0]).toHaveProperty('target.href', 'https://bing.com/');
 });
